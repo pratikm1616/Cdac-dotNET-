@@ -1,0 +1,73 @@
+namespace Interface
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Class1 obj= new Class1();
+            obj.Close();
+            obj.Open();
+            obj.Delete();
+            
+
+            //IDbFunction idb = obj;
+            //idb.Open();
+
+            (obj as FileFunction).Open();
+            (obj as FileFunction).Close();
+            (obj as FileFunction).Delete();
+
+
+
+        }
+    }
+
+    public interface IDbFunction
+    {
+          void Open();
+         void Delete();
+         void Close();
+    }
+
+
+    public interface FileFunction
+    {
+        void Open();
+        void Delete();
+        void Close();
+    }
+
+    public class Class1 : IDbFunction,FileFunction
+    {
+        public void Close()
+        {
+            Console.WriteLine("IDbFunction 1 Close");
+        }
+
+        public void Delete()
+        {
+            Console.WriteLine("IDbFunction 1 Delete");
+        }
+
+        public void Open()
+        {
+            Console.WriteLine("IDbFunction 1 Open");
+        }
+
+      
+        void FileFunction.Close()
+        {
+            Console.WriteLine("FileFunction Closefile");
+        }
+
+        void FileFunction.Delete()
+        {
+            Console.WriteLine("FileFunction Deletefile");
+        }
+
+        void FileFunction.Open()
+        {
+            Console.WriteLine("FileFunction Openfile");
+        }
+    }
+}
