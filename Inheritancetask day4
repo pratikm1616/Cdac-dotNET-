@@ -1,0 +1,207 @@
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace InheritanceTaskDay4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, World!");
+            Manager mg = new Manager("mndbjvb",5000.00M,10,"Pune");
+
+            //Employee emp1 = new Employee("Pratik", 145236);
+            //Employee emp2 = new Employee("Pratik");
+            //Employee emp3 = new Employee();
+            Console.WriteLine(mg.EmpNo);
+            Console.WriteLine(mg.Name);
+            Console.WriteLine(mg.Base);
+            Console.WriteLine(mg.Deptno);
+            Console.WriteLine("Net Salary = "+mg.CalcNetSalary());
+            mg.Open();
+
+            Manager mg1 = new Manager("Pratik", 5000000.00M, 10, "UAE");
+            Console.WriteLine(mg1.EmpNo);
+            Console.WriteLine(mg1.Name);
+            Console.WriteLine(mg1.Base);
+            Console.WriteLine(mg1.Deptno);
+            Console.WriteLine("Net Salary = " + mg.CalcNetSalary());
+
+            Console.WriteLine("==============================================================");
+            Console.WriteLine("C    E     O");
+
+            CEO obj=new CEO("Pratik Mohite",500000.00M,101);
+            Console.WriteLine(obj.EmpNo);
+            Console.WriteLine(obj.Name);
+            Console.WriteLine(obj.Base);
+            Console.WriteLine(obj.Deptno);
+            Console.WriteLine("Net Salary = " + obj.CalcNetSalary());
+            obj.Close();
+            Console.WriteLine("==============================================================");
+            GeneralManager gm = new GeneralManager("Rahul",25000,5,"Akluj","xyz");
+            Console.WriteLine(gm.EmpNo);
+            Console.WriteLine(gm.Name);
+            Console.WriteLine(gm.Base);
+            Console.WriteLine(gm.Deptno);
+            Console.WriteLine(gm.Destination);
+            Console.WriteLine(gm.Perks);
+           
+            Console.WriteLine("Net Salary = " + gm.CalcNetSalary());
+
+            //Console.WriteLine(emp1.Name);
+
+
+            //Console.WriteLine(emp1.Name);
+
+
+        }
+    }
+
+    public interface IDbFunctions
+    {
+        void Open();
+        void Delete();
+        void Close();
+    }
+
+
+    public abstract class Employee: IDbFunctions
+    {
+        private string name;
+        static int empgen = 0;
+        private int empNo;
+        private short deptno;
+        private decimal baseSalary;
+        public int EmpNo
+        {
+
+            get { return empNo; }
+            
+        }
+
+        public Employee(string Name="", decimal Base = 0, short Deptno=0)
+        {
+            empgen++;
+            empNo = empgen;
+            this.Name = Name;
+            this.Base = Base;
+            this.Deptno = Deptno;
+        }
+       
+        public decimal Base
+        {
+            get { return baseSalary; }
+            set
+            {
+                baseSalary = value;
+            }
+        }
+        
+        public string Name
+        {
+            set
+            {
+                name = value;
+            }
+            get
+            {
+                return
+                        name;
+            }
+
+
+        }
+
+
+        public short Deptno
+        {
+            get { return deptno; }
+            set
+            {
+                deptno = value;
+            }
+        }
+        public abstract decimal CalcNetSalary();
+
+        public void Close()
+        {
+            Console.WriteLine("IDbFunction 1 Close");
+        }
+
+        public void Delete()
+        {
+            Console.WriteLine("IDbFunction 1 Delete");
+        }
+
+        public void Open()
+        {
+            Console.WriteLine("IDbFunction 1 Open");
+        }
+    }
+
+    public class Manager : Employee
+    {
+        public Manager(string name, decimal Base, short Deptno,string Destination) : base( name, Base,  Deptno)
+        {
+            this.Destination = Destination;
+        }
+        public override decimal CalcNetSalary()
+        {
+            return Base * 1.5M;
+        }
+
+        private string destination;
+
+        public string Destination
+        {
+            get
+            {
+                return destination;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    Console.WriteLine("Cant be blank");
+                }
+                else
+                {
+                    destination = value;
+                }
+            }
+        }
+    }
+    public class GeneralManager : Manager
+    {
+        public GeneralManager(string Name, int Base, short Deptno, string Destination = "----", string perks="---") :base(Name, Base,  Deptno, Destination)
+        {
+            this.Perks = Perks;
+        }
+        private string perks;
+        public string Perks
+        {
+            set
+            {
+                perks = value;
+
+            }
+            get { return perks; }
+        }
+        public override decimal CalcNetSalary()
+        {
+            return Base * 2M;
+        }
+
+    }
+
+    public class CEO : Employee
+    {
+        public CEO(string Name = "", decimal Base = 0, short Deptno = 0) : base(Name, Base, Deptno)
+        {
+        }
+
+        public sealed override decimal CalcNetSalary()
+        {
+            return Base * 20M;
+        }
+    }
+}
