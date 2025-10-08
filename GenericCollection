@@ -1,0 +1,41 @@
+
+namespace GenericCollections
+
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> obj = new List<int>();
+            obj.Add(1);
+            obj.Add(2);
+            obj.Add(3);
+            obj.Add(4);
+
+
+         // obj.Insert(1, 11); // used to insert element at specific index
+
+           // Console.WriteLine(obj.Contains(5)); // return false... it checks no is present in list or not
+
+          //  obj.AddRange(new List<int> { 5, 6, 7 });    //add elements at end
+
+            //obj.InsertRange(3, new List<int> { 11, 22, 33 });
+
+            Console.WriteLine("Index of 3 element is = "+obj.IndexOf(3)); 
+          //  obj.Remove(4);  //remove element 4
+
+         //   obj.RemoveAt(0);        //remove from aspecific index
+
+          //  Console.WriteLine("Count: " + obj.Count);
+
+
+            foreach (int item in obj)
+            {
+                Console.WriteLine(item);
+            }
+          
+
+        }
+    }
+
+}
