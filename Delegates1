@@ -1,0 +1,58 @@
+namespace DeligatesExamples
+{
+    // step 1 create delegate class
+    public delegate void Del1();
+
+    public delegate int Del2(int a,int b);
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //step 2 ceate delegate reference and pass same function name as parameters
+          //  Del1 obj = new Del1(Display);
+
+
+            //step 3 call fun indirectly
+            //obj();
+            ////obj = Show;
+            ////obj();
+
+            //Console.WriteLine();
+            //obj += Show;
+            //obj();
+
+            //Console.WriteLine();
+            //obj += Display;
+            //obj();
+
+            //Console.WriteLine();
+
+            //do same as obj+=Display
+            Del1 obj1 = (Del1)Delegate.Combine(new Del1(Display), new Del1(Show), new Del1(Display));
+            obj1();
+
+            Console.WriteLine();
+
+            Del2 obj2 = Add;
+            Console.WriteLine(obj2(10, 5));
+
+          //  obj1= (Del1)Delegate.Remove(
+
+
+        }
+
+        static void Display()
+        {
+            Console.WriteLine("In display function");
+        }
+         static void Show()
+        {
+            Console.WriteLine("In show function");
+        }
+
+        static int Add(int a,int b)
+        {
+            return a + b;
+        }
+    }
+}
