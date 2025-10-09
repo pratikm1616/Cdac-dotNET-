@@ -1,0 +1,102 @@
+namespace TryCatch
+{ 
+
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Employee emp = new Employee();
+                emp.EmpNo = 10;
+                emp.Name = "hgfh";
+                emp.Basic =55000.23M;
+                emp.DeptNo = -1;
+            }
+            catch (InvalidEmployee ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
+        }
+    }
+    public class InvalidEmployee : ApplicationException     // 1
+    {
+        public InvalidEmployee(string msg):base(msg) { }
+    }
+    public class Employee
+    {
+        private int empNo;
+        private string name;
+        private decimal basic;
+        private short deptNo;
+        public int EmpNo
+        {
+            
+            get { return empNo; }
+            set
+            {
+                if (value <= 0)
+                {
+                    InvalidEmployee ex = new InvalidEmployee("Invalid Empno");
+                    throw ex;
+                }
+                    
+                else
+                    empNo = value;
+            }
+        }
+        public short DeptNo
+        {
+            get { return deptNo; }
+            set
+            {
+                if (value <= 0)
+                {
+                    InvalidEmployee ex = new InvalidEmployee("Invalid Deptno");
+                    throw ex;
+                }
+                    
+                else
+                    deptNo = value;
+            }
+            
+        }
+        public decimal Basic
+        {
+            get { return basic; }
+            set
+            {
+                if (value > 10000)
+                    basic = value;
+                else
+                {
+                    InvalidEmployee ex = new InvalidEmployee("value must be greater than 10000");
+                    throw ex;
+                }
+                  
+            }
+        }
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if (value == null || value == "")
+                {
+                    InvalidEmployee ex = new InvalidEmployee("Blank name not allowed");
+                    throw ex;
+                }
+                else
+                    name = value;
+            }
+        }
+        public decimal GetNetSalary()
+        {
+            //return Basic * (decimal)2.1;
+            return Basic * 2.1M;
+        }
+    }
+}
+
