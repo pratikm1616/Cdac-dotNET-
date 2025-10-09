@@ -1,0 +1,69 @@
+// Action
+
+namespace DelegateActionFunc
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            //use this for non parameter
+            Action a1 = Display;
+            //calling objec
+            a1();
+
+            //string is parameter...1st write and then return type
+            Action<string>a2=Display;
+            a2("aa");
+        }
+
+        public static void Display()
+        {
+            Console.WriteLine("call display using action");
+        }
+
+        public static void Display(string s)
+        {
+            Console.WriteLine("calling parameterized display using action");
+        }
+    }
+}
+
+
+
+
+======================================================================================================================================
+//Func
+
+namespace Func
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //foun for add 1st int,int are parameters and last one is returntype
+            Func<int, int, int> f1 = Add;
+            Console.WriteLine(f1(10, 20));
+
+            //Predicate use ony with bool and have only one parameter
+            Predicate<int> f2 = IsEven;
+            Console.WriteLine(f2(10));
+        }
+
+        public static int Add(int a,int b)
+        {
+            return a + b;
+        }
+
+        public static bool IsEven(int a) {
+            if (a % 2 == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+}
+
+
+
