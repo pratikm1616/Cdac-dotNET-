@@ -1,0 +1,28 @@
+namespace ExtensionMethod
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int i = 100;
+            i.Display();
+            Console.WriteLine("Addition : " + i.Add(10));
+            Console.WriteLine("Addition : " + i.Sub(10));
+        }
+    }
+    public static class MyExt
+    {
+        public static int Add(this int i,int j)
+        {
+            return i + j;
+        }
+        public static int Sub(this int i,int j)
+        {
+            return i - j;
+        }
+        public static void Display(this int i)
+        {
+            Console.WriteLine(i);
+        }
+    }
+}
