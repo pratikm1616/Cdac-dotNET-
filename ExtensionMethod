@@ -5,9 +5,14 @@ namespace ExtensionMethod
         static void Main(string[] args)
         {
             int i = 100;
+            int x = 50;
+            string s = "pratik";
             i.Display();
             Console.WriteLine("Addition : " + i.Add(10));
             Console.WriteLine("Addition : " + i.Sub(10));
+            x.IsEvenOdd();
+            Console.WriteLine(s.ToCapital());
+
         }
     }
     public static class MyExt
@@ -23,6 +28,23 @@ namespace ExtensionMethod
         public static void Display(this int i)
         {
             Console.WriteLine(i);
+        }
+
+        public static void IsEvenOdd(this int x)
+        {
+            if (x % 2 == 0)
+            {
+                Console.WriteLine(x + " is even number");
+            }
+            else
+            {
+                Console.WriteLine(x+"is odd number");
+            }
+        }
+
+        public static string ToCapital(this string s)
+        {
+            return s.ToUpper();
         }
     }
 }
